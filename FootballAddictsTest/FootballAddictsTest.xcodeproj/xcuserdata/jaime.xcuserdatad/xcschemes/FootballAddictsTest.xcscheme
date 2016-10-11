@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6F13979D1DACF82D0070BADA"
+               BlueprintIdentifier = "6FF32FF91DACF97400D86FBA"
                BuildableName = "FootballAddictsTest.app"
                BlueprintName = "FootballAddictsTest"
                ReferencedContainer = "container:FootballAddictsTest.xcodeproj">
@@ -28,11 +28,21 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6FF3300D1DACF97400D86FBA"
+               BuildableName = "FootballAddictsTestTests.xctest"
+               BlueprintName = "FootballAddictsTestTests"
+               ReferencedContainer = "container:FootballAddictsTest.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F13979D1DACF82D0070BADA"
+            BlueprintIdentifier = "6FF32FF91DACF97400D86FBA"
             BuildableName = "FootballAddictsTest.app"
             BlueprintName = "FootballAddictsTest"
             ReferencedContainer = "container:FootballAddictsTest.xcodeproj">
@@ -55,7 +65,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F13979D1DACF82D0070BADA"
+            BlueprintIdentifier = "6FF32FF91DACF97400D86FBA"
             BuildableName = "FootballAddictsTest.app"
             BlueprintName = "FootballAddictsTest"
             ReferencedContainer = "container:FootballAddictsTest.xcodeproj">
@@ -74,7 +84,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F13979D1DACF82D0070BADA"
+            BlueprintIdentifier = "6FF32FF91DACF97400D86FBA"
             BuildableName = "FootballAddictsTest.app"
             BlueprintName = "FootballAddictsTest"
             ReferencedContainer = "container:FootballAddictsTest.xcodeproj">
