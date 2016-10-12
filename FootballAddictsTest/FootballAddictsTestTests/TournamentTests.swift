@@ -70,6 +70,21 @@ class TournamentTests: XCTestCase {
         XCTAssertEqual(sut?.matchArray.count, expectedMatchCount)
     }
     
+    func testTournamentMatchAndStageCountAfterInit() {
+        let teamOne = Team(name: "Borussia")
+        let teamTwo = Team(name: "Bayern")
+        let expectedMatchCount = 63
+        let expectedStageCount = 6
+        
+        let match1 = Match(teamOne: teamOne, teamTwo: teamTwo, score: nil, state: .NotPlayed)
+        
+        let sut = Tournament(matchArray: [match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!])
+        
+        XCTAssertNotNil(sut)
+        XCTAssertEqual(sut?.matchArray.count, expectedMatchCount)
+        XCTAssertEqual(sut?.stages, expectedStageCount)
+    }
+    
     func testTournamentUpdatesCorrectMatchWithStageIndexAndMatchNumber() {
         let teamOne = Team(name: "Borussia")
         let teamTwo = Team(name: "Bayern")
@@ -87,18 +102,38 @@ class TournamentTests: XCTestCase {
         
         XCTAssertNotNil(sut)
         
-        let expectedScore = "2:0"
+        let expectedScore = Score(teamOneScore: 2, teamTwoScore: 0)
         
-        sut?.updateMatchWithStage(1, matchInStage: 1, score: expectedScore)
+        sut?.updateMatchWithStage(1, matchInStage: 1, score: expectedScore, winningTeam: .TeamOne)
         
         XCTAssertEqual(expectedScore, sut?.matchArray[0].score)
         
-        let secondExpectedScore = "3:1"
-        sut?.updateMatchWithStage(2, matchInStage: 1, score: secondExpectedScore)
+        let secondExpectedScore = Score(teamOneScore: 3, teamTwoScore: 1)
+        sut?.updateMatchWithStage(2, matchInStage: 1, score: secondExpectedScore, winningTeam: .TeamOne)
         XCTAssertEqual(secondExpectedScore, sut?.matchArray[8].score)
         
-        let thirdExpectedScore = "3:2"
-        sut?.updateMatchWithStage(4, matchInStage: 1, score: thirdExpectedScore)
+        let thirdExpectedScore = Score(teamOneScore: 3, teamTwoScore: 2)
+        sut?.updateMatchWithStage(4, matchInStage: 1, score: thirdExpectedScore, winningTeam: .TeamOne)
         XCTAssertEqual(thirdExpectedScore, sut?.matchArray[14].score)
+    }
+    
+    func testTournamentUpdatesNextStageMatch() {
+        let teamOne = Team(name: "Borussia")
+        let teamTwo = Team(name: "Bayern")
+        
+        let match1 = Match(teamOne: teamOne, teamTwo: teamTwo, score: nil, state: .NotPlayed)
+        
+        var sut = Tournament(matchArray: [match1!, match1!, match1!, match1!, match1!, match1!, match1!, match1!])
+        
+        let score = Score(teamOneScore: 0, teamTwoScore: 2)
+        sut?.updateMatchWithStage(1, matchInStage: 1, score: score, winningTeam: .TeamTwo)
+        
+        let score2 = Score(teamOneScore: 2, teamTwoScore: 0)
+        sut?.updateMatchWithStage(1, matchInStage: 2, score: score2, winningTeam: .TeamOne)
+        
+        XCTAssertEqual(sut?.matchArray[1].teamOne, sut?.matchArray[8].teamTwo)
+        
+        sut?.updateMatchWithStage(2, matchInStage: 1, score: score, winningTeam: .TeamTwo)
+        XCTAssertEqual(sut?.matchArray[8].teamTwo, sut?.matchArray[12].teamOne)
     }
 }

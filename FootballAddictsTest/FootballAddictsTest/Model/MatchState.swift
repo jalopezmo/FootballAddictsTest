@@ -8,6 +8,12 @@
 
 import Foundation
 
-enum MatchState:Int {
-    case NotPlayed, Played
+enum MatchState {
+    enum PlayedState:Int {
+        case NotPlayed, Played
+    }
+    
+    enum WinningTeam:Int {
+        case TeamOne, TeamTwo
+    }
 }

@@ -38,7 +38,7 @@ class MatchTests: XCTestCase {
     func testMatchScoreWhenPlayed() {
         let teamOne = Team(name: "Borussia")
         let teamTwo = Team(name: "Bayern")
-        let score = "2:0"
+        let score = Score(teamOneScore: 2, teamTwoScore: 0)
         let sut = Match(teamOne: teamOne, teamTwo: teamTwo, score: score, state: .Played)
         
         XCTAssertEqual(sut?.score, score)
@@ -51,7 +51,7 @@ class MatchTests: XCTestCase {
         
         XCTAssertNil(sut?.score)
         
-        let score = "2:0"
+        let score = Score(teamOneScore: 2, teamTwoScore: 0)
         
         sut?.updateScore(score)
         

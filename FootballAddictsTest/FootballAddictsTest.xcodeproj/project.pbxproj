@@ -19,6 +19,8 @@
 		6FF330281DACFB7600D86FBA /* MatchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF330271DACFB7600D86FBA /* MatchState.swift */; };
 		6FF3302A1DAD015000D86FBA /* Tournament.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF330291DAD015000D86FBA /* Tournament.swift */; };
 		6FF3302C1DAD017100D86FBA /* TournamentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3302B1DAD017100D86FBA /* TournamentTests.swift */; };
+		6FF330301DADCA1400D86FBA /* ScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3302F1DADCA1400D86FBA /* ScoreTests.swift */; };
+		6FF330321DADCA4C00D86FBA /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF330311DADCA4C00D86FBA /* Score.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		6FF330271DACFB7600D86FBA /* MatchState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchState.swift; path = Model/MatchState.swift; sourceTree = "<group>"; };
 		6FF330291DAD015000D86FBA /* Tournament.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tournament.swift; path = Model/Tournament.swift; sourceTree = "<group>"; };
 		6FF3302B1DAD017100D86FBA /* TournamentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentTests.swift; sourceTree = "<group>"; };
+		6FF3302F1DADCA1400D86FBA /* ScoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreTests.swift; sourceTree = "<group>"; };
+		6FF330311DADCA4C00D86FBA /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Score.swift; path = Model/Score.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				6FF3301D1DACF98400D86FBA /* Model */,
+				6FF330331DAE5ACB00D86FBA /* View */,
 				6FF32FFD1DACF97400D86FBA /* AppDelegate.swift */,
 				6FF32FFF1DACF97400D86FBA /* ViewController.swift */,
 				6FF330011DACF97400D86FBA /* Main.storyboard */,
@@ -116,6 +121,7 @@
 				6FF330251DACFB2200D86FBA /* Match.swift */,
 				6FF330291DAD015000D86FBA /* Tournament.swift */,
 				6FF330271DACFB7600D86FBA /* MatchState.swift */,
+				6FF330311DADCA4C00D86FBA /* Score.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -126,8 +132,16 @@
 				6FF3301F1DACF9A500D86FBA /* TeamTests.swift */,
 				6FF330231DACFAD600D86FBA /* MatchTests.swift */,
 				6FF3302B1DAD017100D86FBA /* TournamentTests.swift */,
+				6FF3302F1DADCA1400D86FBA /* ScoreTests.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		6FF330331DAE5ACB00D86FBA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FF330321DADCA4C00D86FBA /* Score.swift in Sources */,
 				6FF3302A1DAD015000D86FBA /* Tournament.swift in Sources */,
 				6FF330221DACFA3C00D86FBA /* Team.swift in Sources */,
 				6FF330001DACF97400D86FBA /* ViewController.swift in Sources */,
@@ -246,6 +261,7 @@
 			files = (
 				6FF3302C1DAD017100D86FBA /* TournamentTests.swift in Sources */,
 				6FF330201DACF9A500D86FBA /* TeamTests.swift in Sources */,
+				6FF330301DADCA1400D86FBA /* ScoreTests.swift in Sources */,
 				6FF330241DACFAD600D86FBA /* MatchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

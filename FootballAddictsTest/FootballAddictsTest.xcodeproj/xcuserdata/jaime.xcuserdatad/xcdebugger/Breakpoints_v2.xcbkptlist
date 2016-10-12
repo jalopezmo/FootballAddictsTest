@@ -69,33 +69,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FootballAddictsTest/Model/Tournament.swift"
-            timestampString = "497884384.353538"
+            filePath = "FootballAddictsTest/Model/Match.swift"
+            timestampString = "497930635.588937"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "updateMatchWithStage(_:matchInStage:score:)"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(teamOne:teamTwo:score:state:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FootballAddictsTest/Model/Tournament.swift"
-            timestampString = "497884676.164667"
+            timestampString = "497965584.197635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "updateMatchWithStage(_:matchInStage:score:)"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "updateTeamOnNextStageMatchWithStage(_:matchInStage:teamToAdd:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FootballAddictsTestTests/TournamentTests.swift"
+            timestampString = "497965910.938064"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "testTournamentUpdatesNextStageMatch()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FootballAddictsTestTests.TournamentTests.testTournamentUpdatesNextStageMatch () -&gt; ()"
+                  moduleName = "FootballAddictsTestTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaime/FootballAddictsTest/FootballAddictsTest/FootballAddictsTestTests/TournamentTests.swift"
+                  timestampString = "497965917.729516"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "6432">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FootballAddictsTestTests.TournamentTests.(testTournamentUpdatesNextStageMatch () -&gt; ()).(implicit closure #3)"
+                  moduleName = "FootballAddictsTestTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaime/FootballAddictsTest/FootballAddictsTest/FootballAddictsTestTests/TournamentTests.swift"
+                  timestampString = "497965917.729907"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FootballAddictsTestTests.TournamentTests.(testTournamentUpdatesNextStageMatch () -&gt; ()).(implicit closure #4)"
+                  moduleName = "FootballAddictsTestTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jaime/FootballAddictsTest/FootballAddictsTest/FootballAddictsTestTests/TournamentTests.swift"
+                  timestampString = "497965917.730293"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

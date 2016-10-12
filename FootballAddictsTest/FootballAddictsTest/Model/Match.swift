@@ -11,10 +11,10 @@ import Foundation
 struct Match {
     var teamOne : Team
     var teamTwo : Team
-    var score : String?
-    var state : MatchState
+    var score : Score?
+    var state : MatchState.PlayedState
     
-    init?(teamOne:Team?, teamTwo:Team?, score:String?, state:MatchState) {
+    init?(teamOne:Team?, teamTwo:Team?, score:Score?, state:MatchState.PlayedState) {
         
         if(teamOne == teamTwo && teamOne != nil && teamTwo != nil) {
             return nil
@@ -42,7 +42,7 @@ struct Match {
         }
     }
     
-    mutating func updateScore(newScore:String) {
+    mutating func updateScore(newScore:Score) {
         self.state = .Played
         self.score = newScore
     }
