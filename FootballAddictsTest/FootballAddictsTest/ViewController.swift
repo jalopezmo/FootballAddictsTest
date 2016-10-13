@@ -8,17 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var mainScrollView:UIScrollView!
     
     var tournament:Tournament?
+    var matchViewFrameArray = [CGRect]()
+    
+    private enum ExpandedBounds:CGFloat {
+        case width = 350
+        case height = 300
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        tournament = Tournament(firstStageMatchCount: 8)
+        tournament = Tournament(firstStageMatchCount: 16)
         
         guard let tournament = tournament else {
             return
@@ -27,26 +32,13 @@ class ViewController: UIViewController {
         defineScrollViewContentSizeWithTournament(tournament)
         initViewWithTournament(tournament)
         
-//        let test = MatchView.init(frame: CGRectMake(20, 20, 170, 50))
-        
-//        test.backgroundColor = UIColor.blueColor()
-        
-//        test.configureViewWithMatch(Match(teamOne: nil, teamTwo: nil, score: nil, state: .NotPlayed)!, stage: 1, inStageIndex: 1)
-//        
-//        mainScrollView.addSubview(test)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        updateScrollViewContent(getVisibleIndexes())
     }
 
     private func defineScrollViewContentSizeWithTournament(tournament:Tournament) {
         let totalWidth = CGFloat(tournament.stages * (MatchView.Constants.Measures.Width.rawValue + 2*MatchView.Constants.Measures.HorizontalDistance.rawValue))
         
         let totalHeight = CGFloat(tournament.getMatchCountForStage(1)*(MatchView.Constants.Measures.Height.rawValue + MatchView.Constants.Measures.VerticalDistance.rawValue) + MatchView.Constants.Measures.Height.rawValue)
-        
-        print("Dimensions: \(totalWidth),\(totalHeight)")
         
         mainScrollView.contentSize = CGSizeMake(totalWidth, totalHeight)
     }
@@ -58,17 +50,99 @@ class ViewController: UIViewController {
             let stage = stageAndIndexInStage.0
             let indexInStage = stageAndIndexInStage.1
             
-            let verticalOffset = (indexInStage-1)*(MatchView.Constants.Measures.Height.rawValue + MatchView.Constants.Measures.VerticalDistance.rawValue) + MatchView.Constants.Measures.VerticalDistance.rawValue
+            var verticalOffset:CGFloat
             
-            //temp
+            verticalOffset = getVerticalOffsetForMatchWithStage(stage,indexInStage: indexInStage, tournament: tournament)
+            
             let horizontalOffset = (stage-1)*(MatchView.Constants.Measures.Width.rawValue + 2*MatchView.Constants.Measures.HorizontalDistance.rawValue) + MatchView.Constants.Measures.HorizontalDistance.rawValue
             
-            let matchView = MatchView.init(frame: CGRectMake(CGFloat(horizontalOffset), CGFloat(verticalOffset), CGFloat(MatchView.Constants.Measures.Width.rawValue), CGFloat(MatchView.Constants.Measures.Height.rawValue)))
-            
-            matchView.configureViewWithMatch(tournament.matchArray[i], stage: stage, inStageIndex: indexInStage)
-            
-            mainScrollView.addSubview(matchView)
+            matchViewFrameArray.append(CGRectMake(CGFloat(horizontalOffset), verticalOffset, CGFloat(MatchView.Constants.Measures.Width.rawValue), CGFloat(MatchView.Constants.Measures.Height.rawValue)))
         }
+    }
+    
+    private func getVerticalOffsetForMatchWithStage(stage:Int, indexInStage:Int, tournament:Tournament) -> CGFloat {
+        if(stage > 1) {
+            let previousMatchOneIndex = tournament.getMatchArrayIndexWithStage(stage-1, matchInStage: indexInStage*2 - 1)
+            let previousMatchTwoIndex = tournament.getMatchArrayIndexWithStage(stage-1, matchInStage: indexInStage*2)
+            
+            let y0 = matchViewFrameArray[previousMatchOneIndex].origin.y
+            let y1 = matchViewFrameArray[previousMatchTwoIndex].origin.y
+            
+            return y0 + ((y1 - y0 + CGFloat(MatchView.Constants.Measures.Height.rawValue))/2) - CGFloat(MatchView.Constants.Measures.Height.rawValue)/2
+        }
+        else {
+            return (CGFloat(indexInStage-1))*CGFloat(MatchView.Constants.Measures.Height.rawValue + MatchView.Constants.Measures.VerticalDistance.rawValue) + CGFloat(MatchView.Constants.Measures.VerticalDistance.rawValue)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        updateScrollViewContent(getVisibleIndexes())
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            updateScrollViewContent(getVisibleIndexes())
+        }
+    }
+    
+    func getVisibleIndexes() -> [Int] {
+        
+        return matchViewFrameArray.filter{
+            return getCurrentExtendedBounds().contains($0)
+        }.map{
+            let index = (matchViewFrameArray.indexOf($0))!
+            return matchViewFrameArray.startIndex.distanceTo(index)
+        }
+    }
+    
+    func updateScrollViewContent(visibleIndexes:[Int]) {
+        let extendedBounds = getCurrentExtendedBounds()
+        
+        mainScrollView.subviews.filter{!extendedBounds.contains($0.frame)}.forEach{$0.removeFromSuperview()}
+        
+        let alreadyVisible:[Int] = mainScrollView.subviews.map{
+            if let matchView = $0 as? MatchView {
+                return matchView.matchAbsoluteIndex!
+            }
+            
+            return -1
+        }
+        
+        guard let tournament = tournament else {
+            return
+        }
+        
+        for i in visibleIndexes {
+            
+            if alreadyVisible.contains(i) {
+                continue
+            }
+            
+            let stageAndIndexInStage = tournament.getMatchStageAndStageIndexWithArrayIndex(i)
+            
+            let stage = stageAndIndexInStage.0
+            let indexInStage = stageAndIndexInStage.1
+            
+            let matchView = MatchView.init(frame: matchViewFrameArray[i])
+            matchView.alpha = 0
+            matchView.configureViewWithMatch(tournament.matchArray[i], stage: stage, inStageIndex: indexInStage, absoluteIndex: i)
+            mainScrollView.addSubview(matchView)
+            
+            UIView.animateWithDuration(0.3, animations: {
+                matchView.alpha = 1
+            })
+        }
+    }
+    
+    func getCurrentExtendedBounds() -> CGRect {
+        let bounds = mainScrollView.bounds
+        
+        let newX = bounds.origin.x - ExpandedBounds.width.rawValue/2
+        let newY = bounds.origin.y - ExpandedBounds.height.rawValue/2
+        let newW = bounds.width + ExpandedBounds.width.rawValue
+        let newH = bounds.height + ExpandedBounds.height.rawValue
+        
+        return CGRectMake(newX,newY,newW,newH)
     }
 }
 

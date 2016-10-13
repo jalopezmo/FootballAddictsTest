@@ -33,6 +33,7 @@ class MatchView: UIView {
     
     var matchStage:Int?
     var matchInStageIndex:Int?
+    var matchAbsoluteIndex:Int?
     
     @IBAction func matchTapped() {
         print("Match tapped: \(matchStage),\(matchInStageIndex)")
@@ -60,7 +61,7 @@ class MatchView: UIView {
         self.addSubview(content)
     }
     
-    func configureViewWithMatch(match:Match, stage:Int, inStageIndex:Int) {
+    func configureViewWithMatch(match:Match, stage:Int, inStageIndex:Int, absoluteIndex:Int) {
         if match.teamOne.name == Team.noTeamName || match.teamTwo.name == Team.noTeamName {
             teamOneScore.text = Constants.Inner.NoScore.rawValue
             teamTwoScore.text = Constants.Inner.NoScore.rawValue
@@ -71,5 +72,6 @@ class MatchView: UIView {
         
         matchStage = stage
         matchInStageIndex = inStageIndex
+        matchAbsoluteIndex = absoluteIndex
     }
 }

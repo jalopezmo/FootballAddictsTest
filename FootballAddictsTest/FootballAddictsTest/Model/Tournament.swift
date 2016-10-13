@@ -122,7 +122,7 @@ struct Tournament {
         self.matchArray[matchIndex] = matchToBeEdited
     }
     
-    private func getMatchArrayIndexWithStage(stage:Int, matchInStage:Int) -> Int {
+    func getMatchArrayIndexWithStage(stage:Int, matchInStage:Int) -> Int {
         var indexOffset = 0
         
         if(stage < 1 || stage > self.stages) {
