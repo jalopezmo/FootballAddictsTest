@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6FF32FFE1DACF97400D86FBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF32FFD1DACF97400D86FBA /* AppDelegate.swift */; };
-		6FF330001DACF97400D86FBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF32FFF1DACF97400D86FBA /* ViewController.swift */; };
+		6FF330001DACF97400D86FBA /* TournamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF32FFF1DACF97400D86FBA /* TournamentViewController.swift */; };
 		6FF330031DACF97400D86FBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FF330011DACF97400D86FBA /* Main.storyboard */; };
 		6FF330051DACF97400D86FBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FF330041DACF97400D86FBA /* Assets.xcassets */; };
 		6FF330081DACF97400D86FBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FF330061DACF97400D86FBA /* LaunchScreen.storyboard */; };
@@ -38,7 +38,7 @@
 /* Begin PBXFileReference section */
 		6FF32FFA1DACF97400D86FBA /* FootballAddictsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootballAddictsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF32FFD1DACF97400D86FBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6FF32FFF1DACF97400D86FBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6FF32FFF1DACF97400D86FBA /* TournamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentViewController.swift; sourceTree = "<group>"; };
 		6FF330021DACF97400D86FBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6FF330041DACF97400D86FBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FF330071DACF97400D86FBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 		6FF330331DAE5ACB00D86FBA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6FF32FFF1DACF97400D86FBA /* ViewController.swift */,
+				6FF32FFF1DACF97400D86FBA /* TournamentViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -265,7 +265,7 @@
 				6FF3302A1DAD015000D86FBA /* Tournament.swift in Sources */,
 				6FF330381DAF06F400D86FBA /* MatchView.swift in Sources */,
 				6FF330221DACFA3C00D86FBA /* Team.swift in Sources */,
-				6FF330001DACF97400D86FBA /* ViewController.swift in Sources */,
+				6FF330001DACF97400D86FBA /* TournamentViewController.swift in Sources */,
 				6FF330281DACFB7600D86FBA /* MatchState.swift in Sources */,
 				6FF32FFE1DACF97400D86FBA /* AppDelegate.swift in Sources */,
 				6FF330261DACFB2200D86FBA /* Match.swift in Sources */,

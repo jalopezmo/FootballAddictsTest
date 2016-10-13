@@ -62,7 +62,7 @@ class MatchView: UIView {
     }
     
     func configureViewWithMatch(match:Match, stage:Int, inStageIndex:Int, absoluteIndex:Int) {
-        if match.teamOne.name == Team.noTeamName || match.teamTwo.name == Team.noTeamName {
+        if match.teamOne.name == Team.noTeamName || match.teamTwo.name == Team.noTeamName || match.score == nil {
             teamOneScore.text = Constants.Inner.NoScore.rawValue
             teamTwoScore.text = Constants.Inner.NoScore.rawValue
         }
