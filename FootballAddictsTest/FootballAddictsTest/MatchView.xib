@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MatchView" customModule="FootballAddictsTest" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="J7u-Ro-0AH"/>
+                <outlet property="teamOneName" destination="jJu-uA-ooh" id="VZ1-pe-oGJ"/>
+                <outlet property="teamOneScore" destination="f8f-dO-AQM" id="CRr-Kd-ff4"/>
+                <outlet property="teamTwoName" destination="crW-GI-YgN" id="XTk-Vg-dnD"/>
+                <outlet property="teamTwoScore" destination="JdO-bP-pYY" id="Dml-so-1hx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team One" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJu-uA-ooh">
+                    <rect key="frame" x="5" y="5" width="133" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="133" id="ktL-jn-p1V"/>
+                        <constraint firstAttribute="height" constant="20" id="niO-Zz-aYQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="LaoSangamMN" family="Lao Sangam MN" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Two" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crW-GI-YgN">
+                    <rect key="frame" x="5" y="25" width="133" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Jdj-Ah-k72"/>
+                        <constraint firstAttribute="width" constant="133" id="flr-uq-qKb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="LaoSangamMN" family="Lao Sangam MN" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8f-dO-AQM">
+                    <rect key="frame" x="143" y="5" width="25" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="ab8-Bz-EMM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="LaoSangamMN" family="Lao Sangam MN" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdO-bP-pYY">
+                    <rect key="frame" x="143" y="25" width="25" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="6yU-Un-6Gd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="LaoSangamMN" family="Lao Sangam MN" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="f8f-dO-AQM" secondAttribute="trailing" constant="2" id="0UY-eh-pju"/>
+                <constraint firstItem="crW-GI-YgN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="0ld-dm-idN"/>
+                <constraint firstItem="jJu-uA-ooh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="34d-Zo-Hhb"/>
+                <constraint firstItem="f8f-dO-AQM" firstAttribute="leading" secondItem="jJu-uA-ooh" secondAttribute="trailing" constant="5" id="Bvg-NI-t1j"/>
+                <constraint firstItem="JdO-bP-pYY" firstAttribute="leading" secondItem="crW-GI-YgN" secondAttribute="trailing" constant="5" id="EyW-2P-kTY"/>
+                <constraint firstAttribute="bottom" secondItem="crW-GI-YgN" secondAttribute="bottom" constant="5" id="Fgy-9K-l9A"/>
+                <constraint firstItem="f8f-dO-AQM" firstAttribute="leading" secondItem="jJu-uA-ooh" secondAttribute="trailing" constant="5" id="SdA-F9-xko"/>
+                <constraint firstItem="jJu-uA-ooh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="nLT-1e-P9m"/>
+                <constraint firstItem="JdO-bP-pYY" firstAttribute="leading" secondItem="crW-GI-YgN" secondAttribute="trailing" constant="5" id="xT4-nG-wjw"/>
+                <constraint firstAttribute="bottom" secondItem="JdO-bP-pYY" secondAttribute="bottom" constant="5" id="xsL-ER-3Xx"/>
+                <constraint firstItem="f8f-dO-AQM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="ygL-ke-NMd"/>
+                <constraint firstAttribute="trailing" secondItem="JdO-bP-pYY" secondAttribute="trailing" constant="2" id="zAc-FU-XHA"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="5Nd-aj-ztl" appends="YES" id="eg1-XQ-2hE"/>
+            </connections>
+            <point key="canvasLocation" x="236" y="203"/>
+        </view>
+        <tapGestureRecognizer id="5Nd-aj-ztl">
+            <connections>
+                <action selector="matchTapped" destination="-1" id="4MA-l8-FQH"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

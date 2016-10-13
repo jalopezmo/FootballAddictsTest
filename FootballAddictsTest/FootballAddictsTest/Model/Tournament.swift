@@ -19,9 +19,9 @@ struct Tournament {
     
     init?(matchArray:[Match]) {
         
-        let log = log2(Double(matchArray.count))
-        
-        if floor(log) == log {
+        if Tournament.checkIfCountIsValid(matchArray.count) {
+            let log = log2(Double(matchArray.count))
+            
             self.stages = Int(log) + 1
             self.matchArray = matchArray
             
@@ -33,6 +33,36 @@ struct Tournament {
         }
         else {
             return nil
+        }
+    }
+    
+    init?(firstStageMatchCount:Int) {
+        
+        if(Tournament.checkIfCountIsValid(firstStageMatchCount)) {
+            let log = log2(Double(firstStageMatchCount))
+            
+            self.stages = Int(log) + 1
+            self.matchArray = [Match]()
+            
+            while(self.matchArray.count < Int(pow(2, Double(self.stages))) - 1) {
+                if let match = Match(teamOne: nil, teamTwo: nil, score: nil, state: .NotPlayed) {
+                    self.matchArray.append(match)
+                }
+            }
+        }
+        else {
+            return nil
+        }
+    }
+    
+    private static func checkIfCountIsValid(firstStageMatchCount:Int) -> Bool {
+        let log = log2(Double(firstStageMatchCount))
+        
+        if floor(log) == log {
+            return true
+        }
+        else {
+            return false
         }
     }
     
@@ -105,5 +135,31 @@ struct Tournament {
         }
         
         return indexOffset + matchInStage - 1
+    }
+    
+    func getMatchStageAndStageIndexWithArrayIndex(arrayIndex:Int) ->(Int,Int) {
+        var offset = 0
+        var previousOffset = 0
+        
+        var matchStage = 0
+        var matchIndexInStage = 0
+        
+        for i in 1...stages {
+            offset += Int(pow(2, Double(stages - i)))
+            
+            if arrayIndex < offset {
+                matchStage = i
+                matchIndexInStage = arrayIndex - previousOffset + 1
+                break
+            }
+            
+            previousOffset = offset
+        }
+        
+        return (matchStage,matchIndexInStage)
+    }
+    
+    func getMatchCountForStage(stage:Int) -> Int {
+        return Int(pow(2, Double(self.stages - stage)))
     }
 }

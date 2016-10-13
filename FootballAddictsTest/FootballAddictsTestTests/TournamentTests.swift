@@ -136,4 +136,44 @@ class TournamentTests: XCTestCase {
         sut?.updateMatchWithStage(2, matchInStage: 1, score: score, winningTeam: .TeamTwo)
         XCTAssertEqual(sut?.matchArray[8].teamTwo, sut?.matchArray[12].teamOne)
     }
+    
+    func testEmptyTournamentCreatedHasCorrectMatchCount() {
+        let expectedCount = 31
+        
+        let sut = Tournament(firstStageMatchCount: 16)
+        
+        XCTAssertEqual(sut?.matchArray.count, expectedCount)
+    }
+    
+    func testStageAndInStageIndexAreCorrect() {
+        let firstExpectedPair = (1,1)
+        let secondExpectedPair = (2,3)
+        let thirdExpectedPair = (4,1)
+        
+        let sut1 = Tournament(firstStageMatchCount: 8)
+        
+        XCTAssertEqual(sut1?.getMatchStageAndStageIndexWithArrayIndex(0).0, firstExpectedPair.0)
+        XCTAssertEqual(sut1?.getMatchStageAndStageIndexWithArrayIndex(0).1, firstExpectedPair.1)
+        
+        XCTAssertEqual(sut1?.getMatchStageAndStageIndexWithArrayIndex(10).0, secondExpectedPair.0)
+        XCTAssertEqual(sut1?.getMatchStageAndStageIndexWithArrayIndex(10).1, secondExpectedPair.1)
+        
+        XCTAssertEqual(sut1?.getMatchStageAndStageIndexWithArrayIndex(14).0, thirdExpectedPair.0)
+        XCTAssertEqual(sut1?.getMatchStageAndStageIndexWithArrayIndex(14).1, thirdExpectedPair.1)
+        
+        let sut2 = Tournament(firstStageMatchCount: 16)
+        
+        let fourthExpectedPair = (1,1)
+        let fifthExpectedPair = (2,6)
+        let sixthExpectedPair = (5,1)
+        
+        XCTAssertEqual(sut2?.getMatchStageAndStageIndexWithArrayIndex(0).0, fourthExpectedPair.0)
+        XCTAssertEqual(sut2?.getMatchStageAndStageIndexWithArrayIndex(0).1, fourthExpectedPair.1)
+        
+        XCTAssertEqual(sut2?.getMatchStageAndStageIndexWithArrayIndex(21).0, fifthExpectedPair.0)
+        XCTAssertEqual(sut2?.getMatchStageAndStageIndexWithArrayIndex(21).1, fifthExpectedPair.1)
+        
+        XCTAssertEqual(sut2?.getMatchStageAndStageIndexWithArrayIndex(30).0, sixthExpectedPair.0)
+        XCTAssertEqual(sut2?.getMatchStageAndStageIndexWithArrayIndex(30).1, sixthExpectedPair.1)
+    }
 }
