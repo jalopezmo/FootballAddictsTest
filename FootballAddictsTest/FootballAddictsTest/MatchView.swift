@@ -34,9 +34,10 @@ class MatchView: UIView {
     var matchStage:Int?
     var matchInStageIndex:Int?
     var matchAbsoluteIndex:Int?
+    var delegate:MatchViewDelegate?
     
     @IBAction func matchTapped() {
-        print("Match tapped: \(matchStage),\(matchInStageIndex)")
+        delegate?.matchClicked(matchStage!, indexInStage: matchInStageIndex!, absoluteIndex: matchAbsoluteIndex!)
     }
     
     override init(frame: CGRect) {
@@ -70,8 +71,16 @@ class MatchView: UIView {
         teamOneName.text = match.teamOne.name
         teamTwoName.text = match.teamTwo.name
         
+        if let score = match.score {
+            teamOneScore.text = String(score.teamOneScore)
+            teamTwoScore.text = String(score.teamTwoScore)
+        }
+        
         matchStage = stage
         matchInStageIndex = inStageIndex
         matchAbsoluteIndex = absoluteIndex
     }
+}
+protocol MatchViewDelegate {
+    func matchClicked(stage:Int, indexInStage:Int, absoluteIndex:Int)
 }

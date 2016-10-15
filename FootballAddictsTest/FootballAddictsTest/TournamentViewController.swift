@@ -33,21 +33,21 @@ class TournamentViewController: UIViewController, UIScrollViewDelegate {
         //where you could click the cell and input the team names.
         
         //This would be the way of initializing a tournament just with the first stage count
-        //tournament = Tournament(firstStageMatchCount: 16)
+        tournament = Tournament(firstStageMatchCount: 8)
         
         //And the way below is the one for it to be initialized with matches for the first
         //stage: (just create a match array and pass it as a parameter to the initializer)
         
-        let match1 = Match(teamOne: Team(name:"Borussia"), teamTwo: Team(name:"Bayern"), score: nil, state: .NotPlayed)
-        let match2 = Match(teamOne: Team(name:"Real Madrid"), teamTwo: Team(name:"Barcelona"), score: nil, state: .NotPlayed)
-        let match3 = Match(teamOne: Team(name:"PSG"), teamTwo: Team(name:"Marseille"), score: nil, state: .NotPlayed)
-        let match4 = Match(teamOne: Team(name:"Manchester City"), teamTwo: Team(name:"Napoli"), score: nil, state: .NotPlayed)
-        let match5 = Match(teamOne: Team(name:"Manchester United"), teamTwo: Team(name:"Arsenal"), score: nil, state: .NotPlayed)
-        let match6 = Match(teamOne: Team(name:"Liverpool"), teamTwo: Team(name:"Leichester"), score: nil, state: .NotPlayed)
-        let match7 = Match(teamOne: Team(name:"Atlético de Madrid"), teamTwo: Team(name:"Athletic Bilbao"), score: nil, state: .NotPlayed)
-        let match8 = Match(teamOne: Team(name:"Inter de Milan"), teamTwo: Team(name:"Porto"), score: nil, state: .NotPlayed)
-        
-        tournament = Tournament(matchArray: [match1!, match2!, match3!, match4!, match5!, match6!, match7!, match8!])
+//        let match1 = Match(teamOne: Team(name:"Borussia"), teamTwo: Team(name:"Bayern"), score: nil, state: .NotPlayed)
+//        let match2 = Match(teamOne: Team(name:"Real Madrid"), teamTwo: Team(name:"Barcelona"), score: nil, state: .NotPlayed)
+//        let match3 = Match(teamOne: Team(name:"PSG"), teamTwo: Team(name:"Marseille"), score: nil, state: .NotPlayed)
+//        let match4 = Match(teamOne: Team(name:"Manchester City"), teamTwo: Team(name:"Napoli"), score: nil, state: .NotPlayed)
+//        let match5 = Match(teamOne: Team(name:"Manchester United"), teamTwo: Team(name:"Arsenal"), score: nil, state: .NotPlayed)
+//        let match6 = Match(teamOne: Team(name:"Liverpool"), teamTwo: Team(name:"Leichester"), score: nil, state: .NotPlayed)
+//        let match7 = Match(teamOne: Team(name:"Atlético de Madrid"), teamTwo: Team(name:"Athletic Bilbao"), score: nil, state: .NotPlayed)
+//        let match8 = Match(teamOne: Team(name:"Inter de Milan"), teamTwo: Team(name:"Porto"), score: nil, state: .NotPlayed)
+//        
+//        tournament = Tournament(matchArray: [match1!, match2!, match3!, match4!, match5!, match6!, match7!, match8!])
         
         guard let tournament = tournament else {
             return
@@ -134,9 +134,13 @@ class TournamentViewController: UIViewController, UIScrollViewDelegate {
         //of this file. We find which views are inside that extended frame and paint the new ones,
         //letting alone the ones that are already there
         
+        guard let tournament = tournament else {
+            return
+        }
+        
         let extendedBounds = getCurrentExtendedBounds()
         
-        mainScrollView.layer.sublayers?.filter{return $0.zPosition == 1000}.forEach{
+        mainScrollView.layer.sublayers?.filter{return $0.zPosition == TournamentViewController.LinesZPosition}.forEach{
             $0.removeFromSuperlayer()
         }
         
@@ -144,14 +148,11 @@ class TournamentViewController: UIViewController, UIScrollViewDelegate {
         
         let alreadyVisible:[Int] = mainScrollView.subviews.map{
             if let matchView = $0 as? MatchView {
+                matchView.configureViewWithMatch(tournament.matchArray[matchView.matchAbsoluteIndex!], stage: matchView.matchStage!, inStageIndex: matchView.matchInStageIndex!, absoluteIndex: matchView.matchAbsoluteIndex!)
                 return matchView.matchAbsoluteIndex!
             }
             
             return -1
-        }
-        
-        guard let tournament = tournament else {
-            return
         }
         
         for i in visibleIndexes {
@@ -166,6 +167,7 @@ class TournamentViewController: UIViewController, UIScrollViewDelegate {
             let indexInStage = stageAndIndexInStage.1
             
             let matchView = MatchView.init(frame: matchViewFrameArray[i])
+            matchView.delegate = self
             matchView.alpha = 0
             matchView.configureViewWithMatch(tournament.matchArray[i], stage: stage, inStageIndex: indexInStage, absoluteIndex: i)
             mainScrollView.addSubview(matchView)
@@ -235,6 +237,122 @@ class TournamentViewController: UIViewController, UIScrollViewDelegate {
             layer.path = previousMatchesLine.CGPath
             layer.zPosition = TournamentViewController.LinesZPosition
             self.mainScrollView.layer.addSublayer(layer)
+        }
+    }
+    
+    func alertToUpdateScoreForMatch(stage:Int, indexInStage:Int, selectedMatch:Match) {
+        
+        let alertController = UIAlertController(title: "Update the scores", message: "Please input the team scores", preferredStyle: .Alert)
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .Default) { (_) in
+            if let teamOneField = alertController.textFields?[0].text, let teamTwoField = alertController.textFields?[1].text {
+                
+                guard let teamOneScore = Int(teamOneField), let teamTwoScore = Int(teamTwoField) else {
+                    return
+                }
+                
+                let winningTeam : MatchState.WinningTeam = (teamOneScore > teamTwoScore) ? .TeamOne : .TeamTwo
+                
+                self.tournament?.updateMatchWithStage(stage, matchInStage: indexInStage, score: Score(teamOneScore: teamOneScore, teamTwoScore: teamTwoScore), winningTeam: winningTeam)
+                
+                self.updateScrollViewContent(self.getVisibleIndexes())
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = selectedMatch.teamOne.name + " score"
+            textField.keyboardType = .NumberPad
+        }
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = selectedMatch.teamTwo.name + " score"
+            textField.keyboardType = .NumberPad
+        }
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func alertToUpdateTeamsForMatch(absoluteIndex:Int) {
+        
+        let alertController = UIAlertController(title: "Update the team names", message: "Please input the team names", preferredStyle: .Alert)
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .Default) { (_) in
+            if let teamOneName = alertController.textFields?[0].text, let teamTwoName = alertController.textFields?[1].text {
+                
+                if !teamOneName.isEmpty && !teamTwoName.isEmpty {
+                    self.tournament?.matchArray[absoluteIndex].teamOne = Team(name: teamOneName)
+                    self.tournament?.matchArray[absoluteIndex].teamTwo = Team(name: teamTwoName)
+                    
+                    self.updateScrollViewContent(self.getVisibleIndexes())
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "First team name"
+        }
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Second team name"
+        }
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+}
+//MARK: MatchView Delegate
+extension TournamentViewController:MatchViewDelegate {
+    func matchClicked(stage: Int, indexInStage: Int, absoluteIndex: Int) {
+        
+        guard let tournament = tournament else {
+            return
+        }
+        
+        let selectedMatch = tournament.matchArray[absoluteIndex]
+        
+        if stage == 1 {
+            if tournament.matchArray[absoluteIndex].state == .NotPlayed {
+                if selectedMatch.teamOne.name == Team.noTeamName || selectedMatch.teamTwo.name == Team.noTeamName {
+                    alertToUpdateTeamsForMatch(absoluteIndex)
+                }
+                else {
+                    alertToUpdateScoreForMatch(stage, indexInStage: indexInStage, selectedMatch: selectedMatch)
+                }
+            }
+        }
+        else {
+            if tournament.matchArray[absoluteIndex].state == .NotPlayed {
+                if tournament.matchArray[absoluteIndex].teamOne.name == Team.noTeamName || tournament.matchArray[absoluteIndex].teamTwo.name == Team.noTeamName {
+                    
+                    let alertController = UIAlertController(title: "Oops!", message: "This match cannot be updated until the two teams playing have been defined.", preferredStyle: .Alert)
+                    
+                    let okAction = UIAlertAction(title: "Ok", style: .Cancel) { (_) in }
+                    alertController.addAction(okAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                else {
+                    alertToUpdateScoreForMatch(stage, indexInStage: indexInStage, selectedMatch: selectedMatch)
+                }
+            }
+        }
+        
+        if tournament.matchArray[absoluteIndex].state == .Played {
+            let alertController = UIAlertController(title: "Oops!", message: "This match has already been played.", preferredStyle: .Alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: .Cancel) { (_) in }
+            alertController.addAction(okAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
 }
