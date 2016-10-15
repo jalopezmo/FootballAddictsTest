@@ -33,21 +33,21 @@ class TournamentViewController: UIViewController, UIScrollViewDelegate {
         //where you could click the cell and input the team names.
         
         //This would be the way of initializing a tournament just with the first stage count
-        tournament = Tournament(firstStageMatchCount: 8)
+//        tournament = Tournament(firstStageMatchCount: 8)
         
         //And the way below is the one for it to be initialized with matches for the first
         //stage: (just create a match array and pass it as a parameter to the initializer)
         
-//        let match1 = Match(teamOne: Team(name:"Borussia"), teamTwo: Team(name:"Bayern"), score: nil, state: .NotPlayed)
-//        let match2 = Match(teamOne: Team(name:"Real Madrid"), teamTwo: Team(name:"Barcelona"), score: nil, state: .NotPlayed)
-//        let match3 = Match(teamOne: Team(name:"PSG"), teamTwo: Team(name:"Marseille"), score: nil, state: .NotPlayed)
-//        let match4 = Match(teamOne: Team(name:"Manchester City"), teamTwo: Team(name:"Napoli"), score: nil, state: .NotPlayed)
-//        let match5 = Match(teamOne: Team(name:"Manchester United"), teamTwo: Team(name:"Arsenal"), score: nil, state: .NotPlayed)
-//        let match6 = Match(teamOne: Team(name:"Liverpool"), teamTwo: Team(name:"Leichester"), score: nil, state: .NotPlayed)
-//        let match7 = Match(teamOne: Team(name:"Atlético de Madrid"), teamTwo: Team(name:"Athletic Bilbao"), score: nil, state: .NotPlayed)
-//        let match8 = Match(teamOne: Team(name:"Inter de Milan"), teamTwo: Team(name:"Porto"), score: nil, state: .NotPlayed)
-//        
-//        tournament = Tournament(matchArray: [match1!, match2!, match3!, match4!, match5!, match6!, match7!, match8!])
+        let match1 = Match(teamOne: Team(name:"Borussia"), teamTwo: Team(name:"Bayern"), score: nil, state: .NotPlayed)
+        let match2 = Match(teamOne: Team(name:"Real Madrid"), teamTwo: Team(name:"Barcelona"), score: nil, state: .NotPlayed)
+        let match3 = Match(teamOne: Team(name:"PSG"), teamTwo: Team(name:"Marseille"), score: nil, state: .NotPlayed)
+        let match4 = Match(teamOne: Team(name:"Manchester City"), teamTwo: Team(name:"Napoli"), score: nil, state: .NotPlayed)
+        let match5 = Match(teamOne: Team(name:"Manchester United"), teamTwo: Team(name:"Arsenal"), score: nil, state: .NotPlayed)
+        let match6 = Match(teamOne: Team(name:"Liverpool"), teamTwo: Team(name:"Leichester"), score: nil, state: .NotPlayed)
+        let match7 = Match(teamOne: Team(name:"Atlético de Madrid"), teamTwo: Team(name:"Athletic Bilbao"), score: nil, state: .NotPlayed)
+        let match8 = Match(teamOne: Team(name:"Inter de Milan"), teamTwo: Team(name:"Porto"), score: nil, state: .NotPlayed)
+
+        tournament = Tournament(matchArray: [match1!, match2!, match3!, match4!, match5!, match6!, match7!, match8!])
         
         guard let tournament = tournament else {
             return
